@@ -13,25 +13,54 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
     static {
         System.loadLibrary("ndk1");
     }
+
+    String hostname = "mptcpsrv1.philippschmitt.de";
+    Integer port = 8080;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_ndk1_sample);
         System.loadLibrary("ndk1");
-        final Button button = (Button) findViewById(R.id.button);
+        final Button buttonUrgent = (Button) findViewById(R.id.buttonUrgent);
+        final Button buttonUnimportant = (Button) findViewById(R.id.buttonUnimportant);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonUrgent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                 Perform action on click
                 try {
                     helloLog("This will log to LogCat via the native call.");
+                    if (0 != sendUrgent(hostname, port, "This is some sample " +
+                            "data that should have set the Urgent flag", true)) {
+                        helloLog("Urgent data sent");
+                    }
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
                 }
 
-                button.setText("clicked");
+                buttonUrgent.setText("Urgent clicked");
+            }
+        });
+
+        buttonUnimportant.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                 Perform action on click
+                try {
+                    helloLog("This will log to LogCat via the native call.");
+                    if (0 != sendUrgent(hostname, port, "Just a few random text " +
+                            "that is really unimportant and we don't care what happens - if you " +
+                            "want, you can perform am MITM-attack on it and noone cares because " +
+                            "this is just some random unimportant text that we use to see " +
+                            "whether the flag is set or not and here it should not be set", false)) {
+                        helloLog("Unimportant data sent");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                buttonUnimportant.setText("Unimportant clicked");
             }
         });
     }
@@ -59,4 +88,6 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
     }
 
     private native void helloLog(String logThis);
+
+    private native int sendUrgent(String jurl, int portno, String jdata, boolean jSetUrgentFlag);
 }
