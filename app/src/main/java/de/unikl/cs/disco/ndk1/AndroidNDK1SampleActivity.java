@@ -29,10 +29,13 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
             public void onClick(View v) {
 //                 Perform action on click
                 try {
-                    helloLog("This will log to LogCat via the native call.");
-                    if (0 != sendUrgent(hostname, port, "This is some sample " +
-                            "data that should have set the Urgent flag", true)) {
+                    helloLog("Trying to send urgent data");
+                    int errorcode = sendUrgent(hostname, port, "This is some sample " +
+                            "data that should have set the Urgent flag", true);
+                    if (0 == errorcode) {
                         helloLog("Urgent data sent");
+                    } else {
+                        helloLog("Error in sending urgent data. Error code: " + errorcode);
                     }
                 }
                 catch (Exception e)
@@ -48,18 +51,20 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
             public void onClick(View v) {
 //                 Perform action on click
                 try {
-                    helloLog("This will log to LogCat via the native call.");
-                    if (0 != sendUrgent(hostname, port, "Just a few random text " +
+                    helloLog("Trying to send unimportant data");
+                    int errorcode = sendUrgent(hostname, port, "Just a few random text " +
                             "that is really unimportant and we don't care what happens - if you " +
                             "want, you can perform am MITM-attack on it and noone cares because " +
                             "this is just some random unimportant text that we use to see " +
-                            "whether the flag is set or not and here it should not be set", false)) {
+                            "whether the flag is set or not and here it should not be set", false);
+                    if (0 == errorcode) {
                         helloLog("Unimportant data sent");
+                    } else {
+                        helloLog("Error in sending unimportant data. Error code: " + errorcode);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 buttonUnimportant.setText("Unimportant clicked");
             }
         });

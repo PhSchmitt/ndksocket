@@ -1,5 +1,4 @@
-/home/philipp/AndroidStudioProjects/Ndk1/obj/local/armeabi/objs/ndk1/native.o: \
- /home/philipp/AndroidStudioProjects/Ndk1/jni/native.c \
+obj/local/armeabi/objs/ndk1/native.o: jni/native.c \
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h \
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -65,7 +64,12 @@
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/in6.h \
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/ipv6.h \
  /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/netinet/in6.h \
- /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/netdb.h
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/netdb.h \
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/errno.h \
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/errno.h \
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm/errno.h \
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm-generic/errno.h \
+ /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm-generic/errno-base.h
 
 /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h:
 
@@ -198,3 +202,13 @@
 /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/netinet/in6.h:
 
 /home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/netdb.h:
+
+/home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/errno.h:
+
+/home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/errno.h:
+
+/home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm/errno.h:
+
+/home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm-generic/errno.h:
+
+/home/philipp/ndkandroid/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm-generic/errno-base.h:
