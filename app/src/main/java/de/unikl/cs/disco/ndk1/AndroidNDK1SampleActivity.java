@@ -2,6 +2,7 @@ package de.unikl.cs.disco.ndk1;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,45 +26,41 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
         final Button buttonUrgent = (Button) findViewById(R.id.buttonUrgent);
         final Button buttonUnimportant = (Button) findViewById(R.id.buttonUnimportant);
 
+        try
+        {
+            int error = openConnection(hostname, port);
+            if (0 == error) {
+                Log.d("NDK: ","Connection opened");
+            } else {
+                Log.d("NDK: ","error opening connection" + error);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         buttonUrgent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                 Perform action on click
-                try {
-                    helloLog("Trying to send urgent data");
-                    int errorcode = sendUrgent(hostname, port, "This is some sample " +
-                            "data that should have set the Urgent flag", true);
-                    if (0 == errorcode) {
-                        helloLog("Urgent data sent");
-                    } else {
-                        helloLog("Error in sending urgent data. Error code: " + errorcode);
-                    }
+                int errorcode = sendNative( "This is some sample " +
+                            "data that should have set the Urgent flag \n", true);
+                if (0 == errorcode) {
+                    Log.d("NDK: ","Urgent data sent");
+                } else {
+                    Log.d("NDK: ","error sending urgent data" + errorcode);
                 }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-
                 buttonUrgent.setText("Urgent clicked");
             }
         });
 
         buttonUnimportant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                 Perform action on click
-                try {
-                    helloLog("Trying to send unimportant data");
-                    int errorcode = sendUrgent(hostname, port, "Just a few random text " +
-                            "that is really unimportant and we don't care what happens - if you " +
-                            "want, you can perform am MITM-attack on it and noone cares because " +
-                            "this is just some random unimportant text that we use to see " +
-                            "whether the flag is set or not and here it should not be set", false);
-                    if (0 == errorcode) {
-                        helloLog("Unimportant data sent");
-                    } else {
-                        helloLog("Error in sending unimportant data. Error code: " + errorcode);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                int errorcode = sendNative( "This is some unimportant sample " +
+                        "data that should not have set the Urgent flag \n", false);
+                if (0 == errorcode) {
+                    Log.d("NDK: ","Unimportant data sent");
+                } else {
+                    Log.d("NDK: ","error sending unimportant data" + errorcode);
                 }
                 buttonUnimportant.setText("Unimportant clicked");
             }
@@ -92,7 +89,9 @@ public class AndroidNDK1SampleActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private native void helloLog(String logThis);
+    private native int openConnection(String jurl, int portno);
 
-    private native int sendUrgent(String jurl, int portno, String jdata, boolean jSetUrgentFlag);
+    private native int sendNative(String jdata, Boolean jSetUrgentFlag);
+
+    private native int closeConnection();
 }
